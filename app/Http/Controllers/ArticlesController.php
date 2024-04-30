@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
-    public function index(): View
+    public function index(): View //kai eini i articles.indes tai rodo visus articles
     {
         $article = new Article();
         return view('articles.index', ['articles' => $article->all()]);
@@ -23,7 +23,7 @@ class ArticlesController extends Controller
     {
         return view('articles.create');
     }
-    public function edit(int $id): View
+    public function edit(int $id): View //randa ar egzistuoja
     {
         return view('articles.edit', ['article' => Article::findOrFail($id)]);
     }
@@ -35,7 +35,7 @@ class ArticlesController extends Controller
 
         return redirect()->route('articles.show', ['article' => $articleItem->id]);
     }
-    public function update(StoreArticleRequest $request, int $id): RedirectResponse
+    public function update(StoreArticleRequest $request, int $id): RedirectResponse //updeitina article
     {
         $article = (new Article()) -> findOrFail($id);
         $validated = $request->validated();
@@ -55,4 +55,26 @@ class ArticlesController extends Controller
 
         return redirect()->route('articles.index');
     }
+
+    public function register(Request $request, Article $article): RedirectResponse
+    {
+        $registrationStatus = $article->registerUser(auth()->id());
+
+        switch ($registrationStatus) {
+            case 'success':
+                session()->flash('status', 'You just registered!');
+                return redirect()->route('articles.show', ['article' => $article->id]);
+            case 'already_registered':
+                session()->flash('status', 'You already registered to this event!');
+                return back();
+            case 'sold_out':
+                session()->flash('status', 'All tickets are sold out');
+                return back();
+            default:
+                session()->flash('status', 'An unexpected error occurred.');
+                return back();
+        }
+    }
+
 }
+

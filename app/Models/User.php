@@ -21,7 +21,9 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'username',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -38,14 +40,17 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
+    protected $casts = [ //ka galima pakeist?
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
     public function isAdmin()
     {
-        // Assuming 'is_admin' is the name of the column in your users table.
-        // Returns true if is_admin is true, false otherwise.
         return $this->is_admin;
     }
+    public function registeredConferences()
+    {
+        return $this->belongsToMany(Article::class, 'article_user')->withTimestamps();
+    }
+
 }
