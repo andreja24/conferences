@@ -4,25 +4,46 @@
     @if(session('status'))
         <div class="status"> {{session(('status'))}}</div>
     @endif
-    <section class="row justify-content-center articleProfile align-content-center">
-        <article class="article col-4 p-3 me-3">
-            <h4><a href="{{ route('articles.show', ['article' => $article['id']]) }}">{{ $article['title'] }}</a></h4>
-            <p>{{ $article['date'] }}</p>
+    <section class="articleProfile">
+        <article class="article me-3 col-4 row align-content-center justify-content-center">
+            <h4 class="heading4 row justify-content-center">{{ $article['title'] }}</h4>
         </article>
-        <div class="col-3 ms-3">
-            <p>{{$article['speaker']}}</p>
-            <p>{{$article['length']}}</p>
-            <p>{{$article['start_time']}}</p>
-            <p>{{$article['address']}}</p>
-            <p>{{$article['date']}}</p>
+        <div class="col-3 ms-3 row articleInfo">
+            <h4>SPEAKER: <span>{{$article['speaker']}}</span></h4>
+            <h4>DATE: <span>{{$article['date']}}</span></h4>
+            <h4>ADDRESS: <span>{{$article['address']}}</span></h4>
+            <h4> START TIME: <span>{{$article['start_time']}}</span></h4>
             @if ($article->tickets_left > 0)
-                <form action="{{ route('articles.register', $article) }}" method="POST" class="registerBtn">
+                <form action="{{ route('articles.register', $article) }}" method="POST" class="registerBtn row justify-content-start">
                     @csrf
-                    <button type="submit">Register</button>
+                    <button type="submit" class=" mainButton col-8"><b>REGISTER</b></button>
                 </form>
             @else
-                <button class="btn btn-danger" disabled>Sold Out</button>
+                <button class="btn btn-danger" disabled>SOLD OUT</button>
             @endif
         </div>
+    </section>
+    <section class="scrolling-container col-12">
+        <div class="scrolling-text col-12">
+            <span class="col-2">about</span>
+            <img class="col-1" src="{{ asset('images/icon.svg') }}" alt="Description of SVG">
+            <span class="col-2">about</span>
+            <img class="col-1" src="{{ asset('images/icon.svg') }}" alt="Description of SVG">
+            <span class="col-2">about</span>
+            <img class="col-1" src="{{ asset('images/icon.svg') }}" alt="Description of SVG">
+            <span class="col-2">about</span>
+            <img class="col-1" src="{{ asset('images/icon.svg') }}" alt="Description of SVG">
+            <span class="col-2">about</span>
+            <img class="col-1" src="{{ asset('images/icon.svg') }}" alt="Description of SVG">
+            <span class="col-2">about</span>
+            <img class="col-1" src="{{ asset('images/icon.svg') }}" alt="Description of SVG">
+            <span class="col-2">about</span>
+            <img class="col-1" src="{{ asset('images/icon.svg') }}" alt="Description of SVG">
+            <span class="col-2">about</span>
+            <img class="col-1" src="{{ asset('images/icon.svg') }}" alt="Description of SVG">
+        </div>
+    </section>
+    <section class="aboutArticle">
+        <p class="col-7">{{$article['content']}}</p>
     </section>
 @endsection

@@ -66,10 +66,10 @@ class ArticlesController extends Controller
                 return redirect()->route('articles.show', ['article' => $article->id]);
             case 'already_registered':
                 session()->flash('status', 'You already registered to this event!');
-                return back();
+                return redirect()->route('articles.show', ['article' => $article->id]);
             case 'sold_out':
                 session()->flash('status', 'All tickets are sold out');
-                return back();
+                return redirect()->route('articles.show', ['article' => $article->id]);
             default:
                 session()->flash('status', 'An unexpected error occurred.');
                 return back();

@@ -1,16 +1,15 @@
 @yield('content')
     @extends('layouts.app')
     @section('content')
-        <h3 class="row justify-content-center heading3">CONFERENCES</h3>
-        @guest
-            <p>SVECIAS</p>
-        @endguest
+        <h3 class="m-0 row justify-content-center align-content-center heading3 conferenceWord">CONFERENCES</h3>
         @if(session('status'))
             <div class="status">{{session('status')}}</div>
         @endif
         @auth
             @if(auth()->user()->isAdmin())
-                <a href="{{ route('articles.create') }}"><button type="button">Create article</button></a>
+                <a href="{{ route('articles.create') }}">
+                    <button type="button" class="col-2 mainButton mt-0 offset-5">CREATE ARTICLE</button>
+                </a>
             @endif
         @endauth
         @each('articles.partials.list', $articles, 'article')

@@ -1,20 +1,19 @@
-<article class="col-4 articleContainer">
-    <div class="article col-9">
-        <h4><a href="{{ route('articles.show', ['article' => $article['id']]) }}">{{ $article['title'] }}</a></h4>
-        <p>{{ $article['date'] }}</p>
+<article class="col-4 articleContainers ">
+    <div class="article col-9 row align-content-center justify-content-center">
+        <h4 class="heading4 row justify-content-center"><a class="row justify-content-center" href="{{ route('articles.show', ['article' => $article['id']]) }}">{{ $article['title'] }}</a></h4>
     </div>
-    <div class="articleButtons">
-        <form action="{{ route('articles.register', $article) }}" method="POST" class="registerBtn">
+    <div class="articleButtons col-11 justify-content-around">
+        <form action="{{ route('articles.register', $article) }}" method="POST" class="registerBtn col-3">
             @csrf
-            <button type="submit">Register</button>
+            <button type="submit" class="mainButton col-12">REGISTER</button>
         </form>
         @auth
             @if(auth()->user()->isAdmin())
-                    <a href="{{route ('articles.edit', ['article' => $article['id']])}}" class="editBtn"><button type="button">Edit</button></a>
-                    <form action="{{ route('articles.destroy', ['article' => $article['id']]) }}" method="POST" class="deleteBtn">
+                    <a href="{{route ('articles.edit', ['article' => $article['id']])}}" class="registerBtn col-3"><button type="button" class="mainButton col-12">EDIT</button></a>
+                    <form action="{{ route('articles.destroy', ['article' => $article['id']]) }}" method="POST" class="deleteBtn row col-3">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Delete</button>
+                        <button type="submit" class="btn btn-danger col-12">DELETE</button>
                     </form>
             @endif
         @endauth
