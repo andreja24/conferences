@@ -40,7 +40,7 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [ //ka galima pakeist?
+    protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];

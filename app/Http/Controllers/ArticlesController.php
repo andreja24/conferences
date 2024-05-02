@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
-    public function index(): View //kai eini i articles.indes tai rodo visus articles
+    public function index(): View //returns every article in the article page
     {
         $article = new Article();
         return view('articles.index', ['articles' => $article->all()]);
@@ -23,7 +23,7 @@ class ArticlesController extends Controller
     {
         return view('articles.create');
     }
-    public function edit(int $id): View //randa ar egzistuoja
+    public function edit(int $id): View
     {
         return view('articles.edit', ['article' => Article::findOrFail($id)]);
     }

@@ -5,7 +5,7 @@
 
 @section('content')
     <section class="creationForm row justify-content-center align-content-center m-0 p-0">
-        <h2 class="heading3 row justify-content-center">ARTICLE CREATION FORM</h2>
+        <h2 class="heading3 row justify-content-center">@lang('texts.article_creation_form')</h2>
         <form class="form col-9" action="{{ route('articles.store') }}" method="POST">
             @csrf
             @include('articles.partials.form')
