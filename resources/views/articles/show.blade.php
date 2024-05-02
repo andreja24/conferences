@@ -16,8 +16,8 @@
             @if ($article->tickets_left > 0)
                 <form action="{{ route('articles.register', $article) }}" method="POST" class="registerBtn row justify-content-start">
                     @csrf
-                    <button type="button" class="mainButton col-8">
-                        <b>@lang('texts.delete')</b>
+                    <button type="submit" class="mainButton col-8">
+                        <b>@lang('texts.register')</b>
                     </button>
                 </form>
             @else
